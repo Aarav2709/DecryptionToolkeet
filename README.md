@@ -1,28 +1,36 @@
-# 🔓 Decryption Toolkit
+# 🔓 Decryption Toolkeet
 
-Decryption Toolkit is a comprehensive Python CLI tool for automatically decoding and decrypting strings using a wide range of classic ciphers and encodings.
+Decryption Toolkeet is a comprehensive Python CLI tool for automatically decoding and decrypting strings using a wide range of classic ciphers and encodings.
 
-[![Python Version](https://img.shields.io/badge/python-3.7%2B-blue.svg)](https://www.python.org/downloads/)
-[![License](https://img.shields.io/github/license/Aarav2709/DecryptionToolkit)](https://github.com/Aarav2709/DecryptionToolkit/blob/main/LICENSE)
-[![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![PyPI Downloads](https://static.pepy.tech/badge/decryptiontoolkeet)](https://pepy.tech/projects/decryptiontoolkeet)
+[![PyPI version](https://img.shields.io/pypi/v/DecryptionToolkeet.svg)](https://pypi.org/project/DecryptionToolkeet/)
+[![Downloads](https://img.shields.io/pypi/dm/DecryptionToolkeet.svg)](https://pypi.org/project/DecryptionToolkeet/)
+[![Python Version](https://img.shields.io/pypi/pyversions/DecryptionToolkeet.svg)](https://pypi.org/project/DecryptionToolkeet/) 
+[![License](https://img.shields.io/github/license/Aarav2709/DecryptionToolkeet)](https://github.com/Aarav2709/DecryptionToolkeet/blob/main/LICENSE)
 
 ---
 
 ## 🚀 Installation
 
-### Option 1: Clone Repository
+### Option 1: Install from PyPI (Recommended)
+Install the latest stable version from PyPI:
+```bash
+pip install DecryptionToolkeet
+```
+
+### Option 2: Clone Repository
 Clone and run the tool locally:
 ```bash
-git clone https://github.com/Aarav2709/DecryptionToolkit.git
-cd DecryptionToolkit
-cd DecryptionToolkit
+git clone https://github.com/Aarav2709/DecryptionToolkeet.git
+cd DecryptionToolkeet
+cd DecryptionToolkeet
 python main.py --help
 ```
 
-### Option 2: Direct Usage
+### Option 3: Direct Usage
 Run directly after downloading:
 ```bash
-cd DecryptionToolkit/DecryptionToolkit
+cd DecryptionToolkeet/DecryptionToolkeet
 python main.py 'SGVsbG8gV29ybGQ='
 ```
 
@@ -31,7 +39,13 @@ python main.py 'SGVsbG8gV29ybGQ='
 ## ▶️ How to Use
 
 ### Basic Commands
-Once in the DecryptionToolkit directory, use these commands:
+
+#### If installed via PyPI:
+```bash
+python -c "from DecryptionToolkeet import main; main()" 'SGVsbG8gV29ybGQ='
+```
+
+#### If running locally (in DecryptionToolkeet directory):
 
 #### Auto-Detection Mode (Default)
 ```bash
@@ -117,6 +131,14 @@ Disables colored output for terminals that don't support it.
 ## 📊 Sample Test Strings
 Try these encoded strings with the tool:
 
+#### For PyPI installation:
+```bash
+python -c "from DecryptionToolkeet import main; main(['SGVsbG8gV29ybGQ='])"
+python -c "from DecryptionToolkeet import main; main(['48656c6c6f20576f726c64'])"
+python -c "from DecryptionToolkeet import main; main(['KHOOR ZRUOG'])"
+```
+
+#### For local installation:
 ```bash
 python main.py 'SGVsbG8gV29ybGQ='
 python main.py '48656c6c6f20576f726c64'
