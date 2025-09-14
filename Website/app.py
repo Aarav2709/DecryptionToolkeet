@@ -11,6 +11,8 @@ Version: 1.0.0
 
 import sys
 import os
+import traceback
+import logging
 from flask import Flask, render_template, request, jsonify
 from typing import List, Dict, Any
 
@@ -40,9 +42,23 @@ try:
 except Exception as e:
     # Don't crash on import; return useful errors from endpoints instead
     print(f"Error initializing AutoDetector: {e}")
+    traceback.print_exc()
     detector = None
     decoders = []
     decoder_map = {}
+
+# Configure basic logging so Vercel shows tracebacks in logs
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+
+@app.errorhandler(Exception)
+def handle_exception(e):
+    # Log full traceback for debugging in Vercel logs
+    tb = traceback.format_exc()
+    logger.error('Unhandled exception: %s', tb)
+    # Return error and traceback (helpful for debugging deployment issues)
+    return jsonify({'error': str(e), 'traceback': tb}), 500
 
 
 @app.route('/')
