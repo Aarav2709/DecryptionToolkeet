@@ -27,13 +27,22 @@ except ImportError as e:
 app = Flask(__name__, static_folder='static', static_url_path='/static')
 app.config['SECRET_KEY'] = 'your-secret-key-here'
 
-# Initialize the decryption components
-detector = AutoDetector()
-formatter = OutputFormatter(use_colors=False)  # Disable colors for web
-decoders = detector.decoders
-
-# Create decoder name mapping
-decoder_map = {decoder.name.lower(): decoder for decoder in decoders}
+# Initialize the decryption components safely
+detector = None
+decoders = []
+decoder_map = {}
+try:
+    detector = AutoDetector()
+    formatter = OutputFormatter(use_colors=False)  # Disable colors for web
+    decoders = detector.decoders
+    # Create decoder name mapping
+    decoder_map = {decoder.name.lower(): decoder for decoder in decoders}
+except Exception as e:
+    # Don't crash on import; return useful errors from endpoints instead
+    print(f"Error initializing AutoDetector: {e}")
+    detector = None
+    decoders = []
+    decoder_map = {}
 
 
 @app.route('/')
@@ -49,6 +58,9 @@ def analyze_string():
         data = request.get_json()
         if not data or 'text' not in data:
             return jsonify({'error': 'No text provided'}), 400
+
+        if detector is None:
+            return jsonify({'error': 'Service not available: detector failed to initialize'}), 503
 
         input_text = data['text'].strip()
         if not input_text:
@@ -91,6 +103,9 @@ def decode_string():
         data = request.get_json()
         if not data or 'text' not in data:
             return jsonify({'error': 'No text provided'}), 400
+
+        if detector is None:
+            return jsonify({'error': 'Service not available: detector failed to initialize'}), 503
 
         input_text = data['text'].strip()
         if not input_text:
@@ -176,6 +191,9 @@ def decode_string():
 def get_decoders():
     """Get list of all available decoders."""
     try:
+        if detector is None:
+            return jsonify({'error': 'Service not available: detector failed to initialize'}), 503
+
         decoder_list = []
         for decoder in decoders:
             decoder_list.append({

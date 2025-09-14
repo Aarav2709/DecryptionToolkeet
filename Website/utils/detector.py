@@ -101,9 +101,11 @@ class AutoDetector:
         Returns:
             Dictionary with analysis results
         """
+        # Normalize analysis keys to match web API expectations
         analysis = {
             'length': len(data),
-            'unique_chars': len(set(data)),
+            # 'characters' should be a list of unique characters (used by the web UI)
+            'characters': list(sorted(set(data))),
             'entropy': self._calculate_entropy(data),
             'char_distribution': self._get_char_distribution(data),
             'patterns': self._detect_patterns(data),
