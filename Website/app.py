@@ -17,13 +17,21 @@ from flask import Flask, render_template, request, jsonify
 from typing import List, Dict, Any
 
 # Import from local Website directories (copied from Python folder)
+# Ensure local package path is available so `utils` and `decoders` can be imported
+current_dir = os.path.dirname(os.path.abspath(__file__))
+if current_dir not in sys.path:
+    sys.path.insert(0, current_dir)
+
 try:
     from utils.detector import AutoDetector
     from utils.formatter import OutputFormatter
 except ImportError as e:
+    # Don't exit here; on serverless platforms the working directory may differ.
+    # We will handle missing imports gracefully during initialization below.
     print(f"Error importing modules: {e}")
     print("Make sure you have copied the decoder and utils files to the Website folder")
-    sys.exit(1)
+    AutoDetector = None
+    OutputFormatter = None
 
 # Make static folder explicit so static files are served correctly
 app = Flask(__name__, static_folder='static', static_url_path='/static')
@@ -233,6 +241,20 @@ def health_check():
     return jsonify({'status': 'healthy', 'decoders_loaded': len(decoders)})
 
 
+@app.route('/_diag', methods=['GET'])
+def diag():
+    """Diagnostic endpoint to help debug import and environment issues."""
+    info = {
+        'cwd': os.getcwd(),
+        'app_file': __file__,
+        'sys_path': sys.path[:20],
+        'detector_imported': AutoDetector is not None,
+        'detector_initialized': detector is not None,
+        'decoders_loaded': len(decoders)
+    }
+    return jsonify(info)
+
+
 if __name__ == '__main__':
     # Check if we're running on Vercel or locally
     port = int(os.environ.get('PORT', 5000))
@@ -241,5 +263,9 @@ if __name__ == '__main__':
     print(f"🔓 Decryption Toolkit Web App starting on port {port}")
     print(f"📊 Loaded {len(decoders)} decoders")
     print(f"📁 Static folder: {app.static_folder} -> URL path: {app.static_url_path}")
+    print(f"📂 App __file__: {__file__}")
+    print(f"📂 Working dir: {os.getcwd()}")
+    print(f"📂 sys.path (first 10): {sys.path[:10]}")
+    print(f"🔎 detector initialized: {detector is not None}")
 
     app.run(host='0.0.0.0', port=port, debug=debug)
