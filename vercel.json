@@ -15,14 +15,5 @@
   "env": {
     "FLASK_APP": "Website/app.py",
     "FLASK_ENV": "production"
-  },
-  "functions": {
-    "Website/app.py": {
-      "includeFiles": [
-        "Python/**",
-        "Website/templates/**",
-        "Website/static/**"
-      ]
-    }
   }
 }
