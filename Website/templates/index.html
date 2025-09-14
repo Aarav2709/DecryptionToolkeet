@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DecryptionToolkeet</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Landing Page -->
+        <div id="landing-page" class="landing-page">
+            <div class="landing-hero">
+                <h1 class="landing-title">DecryptionToolkeet</h1>
+                <p class="landing-subtitle">
+                    A comprehensive web-based tool for decoding and decrypting strings using advanced detection algorithms and a wide range of classic ciphers.
+                </p>
+                <button class="landing-button" onclick="showApp()">
+                    Start Decrypting
+                </button>
+            </div>
+
+            <div class="landing-features">
+                <div class="feature-item">
+                    <h3 class="feature-title">Auto-Detection</h3>
+                    <p class="feature-description">Automatically detects the most likely encoding methods with confidence scoring.</p>
+                </div>
+                <div class="feature-item">
+                    <h3 class="feature-title">33+ Decoders</h3>
+                    <p class="feature-description">Support for Base64, Caesar, Morse, Vigenère, and many more cipher types.</p>
+                </div>
+                <div class="feature-item">
+                    <h3 class="feature-title">Real-time Analysis</h3>
+                    <p class="feature-description">Entropy analysis and pattern recognition for accurate detection.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Application -->
+        <div id="main-app" class="page-hidden">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-content">
+                    <div class="logo">
+                        <h1>DecryptionToolkeet</h1>
+                    </div>
+                    <p class="subtitle">Decode and decrypt strings with advanced detection algorithms.</p>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Input Section -->
+                <section class="input-section">
+                    <div class="input-container">
+                        <label for="input-text">Enter text to decode:</label>
+                        <textarea
+                            id="input-text"
+                            placeholder="Paste your encoded text here..."
+                            rows="4"
+                        ></textarea>
+
+                        <div class="controls">
+                            <div class="decoder-selection">
+                                <label for="decoder-select">Decoder:</label>
+                                <select id="decoder-select">
+                                    <option value="">Auto-detect</option>
+                                </select>
+                            </div>
+
+                            <div class="threshold-control">
+                                <label for="threshold-slider">Confidence Threshold:</label>
+                                <div class="slider-container">
+                                    <input type="range" id="threshold-slider" min="0" max="1" step="0.1" value="0.5">
+                                    <span id="threshold-value">0.5</span>
+                                </div>
+                            </div>
+
+                            <div class="action-buttons">
+                                <button id="analyze-btn" class="btn btn-secondary">
+                                    Analyze
+                                </button>
+                                <button id="decode-btn" class="btn btn-primary">
+                                    Decode
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Loading Indicator -->
+                <div id="loading" class="loading hidden">
+                    <div class="spinner"></div>
+                    <p>Processing...</p>
+                </div>
+
+                <!-- Analysis Results -->
+                <section id="analysis-section" class="results-section hidden">
+                    <h2>String Analysis</h2>
+                    <div class="analysis-grid">
+                        <div class="analysis-item">
+                            <span class="label">Length:</span>
+                            <span id="analysis-length" class="value">-</span>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="label">Character Set:</span>
+                            <span id="analysis-charset" class="value">-</span>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="label">Entropy:</span>
+                            <span id="analysis-entropy" class="value">-</span>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="label">Patterns:</span>
+                            <span id="analysis-patterns" class="value">-</span>
+                        </div>
+                    </div>
+
+                    <div class="detections">
+                        <h3>Possible Encodings:</h3>
+                        <div id="detections-list" class="detections-list">
+                            <!-- Detection results will be populated here -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Decode Results -->
+                <section id="results-section" class="results-section hidden">
+                    <h2>Decode Results</h2>
+                    <div id="results-list" class="results-list">
+                        <!-- Results will be populated here -->
+                    </div>
+                </section>
+
+                <!-- Error Display -->
+                <div id="error-message" class="error-message hidden">
+                    <span id="error-text"></span>
+                </div>
+            </main>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p>&copy; 2025 DecryptionToolkeet by Aarav Gupta. Built with Flask & Python.</p>
+                <div class="footer-links">
+                    <a href="#" onclick="showHelp()">
+                        Help
+                    </a>
+                    <a href="#" onclick="showAbout()">
+                        About
+                    </a>
+                    <a href="#" onclick="showLanding()">
+                        Back to Home
+                    </a>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div id="help-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>How to Use</h3>
+                <button class="close-btn" onclick="closeModal('help-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="help-section">
+                    <h4>🔍 Auto-Detection Mode</h4>
+                    <p>Simply paste your encoded text and click "Decode." The toolkit will automatically detect the most likely encoding methods and attempt to decode them.</p>
+                </div>
+
+                <div class="help-section">
+                    <h4>🎯 Force Decoder</h4>
+                    <p>If you know the encoding type, select it from the dropdown to force a specific decoder.</p>
+                </div>
+
+                <div class="help-section">
+                    <h4>📊 Analysis Mode</h4>
+                    <p>Use "Analyze" to see detailed information about your text including entropy, character patterns, and confidence scores for different encodings.</p>
+                </div>
+
+                <div class="help-section">
+                    <h4>⚙️ Confidence Threshold</h4>
+                    <p>Adjust the threshold to control how confident the auto-detection needs to be. Lower values show more possibilities, higher values show only high-confidence matches.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div id="about-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>About DecryptionToolkeet</h3>
+                <button class="close-btn" onclick="closeModal('about-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>A comprehensive web-based tool for decoding and decrypting strings using a wide range of classic ciphers, encodings, and techniques.</p>
+
+                <h4>Supported Formats:</h4>
+                <div class="format-grid">
+                    <span class="format-tag">Base64</span>
+                    <span class="format-tag">Base32</span>
+                    <span class="format-tag">Hexadecimal</span>
+                    <span class="format-tag">Binary</span>
+                    <span class="format-tag">URL Encoding</span>
+                    <span class="format-tag">HTML Entities</span>
+                    <span class="format-tag">Caesar Cipher</span>
+                    <span class="format-tag">ROT13</span>
+                    <span class="format-tag">Atbash</span>
+                    <span class="format-tag">Vigenère</span>
+                    <span class="format-tag">Morse Code</span>
+                    <span class="format-tag">And many more...</span>
+                </div>
+
+                <div class="author-info">
+                    <p><strong>Created by:</strong> Aarav Gupta</p>
+                    <p><strong>Version:</strong> 1.0.0</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

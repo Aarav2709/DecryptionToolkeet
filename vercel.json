@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "Website/app.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "Website/app.py"
+    }
+  ],
+  "env": {
+    "FLASK_APP": "Website/app.py",
+    "FLASK_ENV": "production"
+  },
+  "functions": {
+    "Website/app.py": {
+      "includeFiles": [
+        "Python/**",
+        "Website/templates/**",
+        "Website/static/**"
+      ]
+    }
+  }
+}
