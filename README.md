@@ -1,12 +1,30 @@
-# 🔓 Decryption Toolkeet
+<h1 align="center">🔓 Decryption Toolkeet</h1>
 
-Decryption Toolkeet is a comprehensive Python CLI tool for automatically decoding and decrypting strings using a wide range of classic ciphers and encodings.
+<p align="center">
+  Decryption Toolkeet is a comprehensive Python CLI tool for automatically decoding and decrypting strings using a wide range of classic ciphers and encodings.
+</p>
 
-[![PyPI Downloads](https://static.pepy.tech/badge/decryptiontoolkeet)](https://pepy.tech/projects/decryptiontoolkeet)
-[![PyPI version](https://img.shields.io/pypi/v/DecryptionToolkeet.svg)](https://pypi.org/project/DecryptionToolkeet/)
-[![Downloads](https://img.shields.io/pypi/dm/DecryptionToolkeet.svg)](https://pypi.org/project/DecryptionToolkeet/)
-[![Python Version](https://img.shields.io/pypi/pyversions/DecryptionToolkeet.svg)](https://pypi.org/project/DecryptionToolkeet/) 
-[![License](https://img.shields.io/github/license/Aarav2709/DecryptionToolkeet)](https://github.com/Aarav2709/DecryptionToolkeet/blob/main/LICENSE)
+<p align="center">
+  <a href="https://pepy.tech/projects/decryptiontoolkeet">
+    <img src="https://static.pepy.tech/badge/decryptiontoolkeet" alt="PyPI Downloads">
+  </a>
+  <a href="https://pypi.org/project/DecryptionToolkeet/">
+    <img src="https://img.shields.io/pypi/v/DecryptionToolkeet.svg" alt="PyPI version">
+  </a>
+  <a href="https://pypi.org/project/DecryptionToolkeet/">
+    <img src="https://img.shields.io/pypi/dm/DecryptionToolkeet.svg" alt="Downloads">
+  </a>
+  <a href="https://pypi.org/project/DecryptionToolkeet/">
+    <img src="https://img.shields.io/pypi/pyversions/DecryptionToolkeet.svg" alt="Python Version">
+  </a>
+  <a href="https://github.com/Aarav2709/DecryptionToolkeet/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/Aarav2709/DecryptionToolkeet" alt="License">
+  </a>
+</p>
+
+<p align="center">
+  <img src="image.png" alt="Decryption Toolkeet Banner" />
+</p>
 
 ---
 
