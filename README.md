@@ -1,4 +1,4 @@
-<h1 align="center">🔓 Decryption Toolkeet</h1>
+<h1 align="center"> Decryption Toolkeet</h1>
 
 <p align="center">
   Decryption Toolkeet is a comprehensive Python CLI tool for automatically decoding and decrypting strings using a wide range of classic ciphers and encodings.
@@ -28,7 +28,7 @@
 
 ---
 
-## 🚀 Installation
+##  Installation
 
 ### Option 1: Install from PyPI (Recommended)
 Install the latest stable version from PyPI:
@@ -54,7 +54,7 @@ python main.py 'SGVsbG8gV29ybGQ='
 
 ---
 
-## ▶️ How to Use
+##  How to Use
 
 ### Basic Commands
 
@@ -123,15 +123,15 @@ Disables colored output for terminals that don't support it.
 
 ---
 
-## 🎮 Features
+##  Features
 
-### 🖥️ Core Features
-- ✅ Auto-Detection with intelligent confidence scoring
-- 🎨 Colorized output with progress bars and icons
-- 📊 Entropy analysis and complexity assessment
-- 🔧 Multiple operation modes (auto, force, interactive)
-- ⚡ High performance with no external dependencies
-- 🔌 Extensible architecture for adding new decoders
+###  Core Features
+-  Auto-Detection with intelligent confidence scoring
+-  Colorized output with progress bars and icons
+-  Entropy analysis and complexity assessment
+-  Multiple operation modes (auto, force, interactive)
+-  High performance with no external dependencies
+-  Extensible architecture for adding new decoders
 
 ### 🔍 Supported Decoders (33+ Total)
 - **Base Encodings**: Base64, Base32, Base85, UUencode, XXencode
@@ -146,7 +146,7 @@ Disables colored output for terminals that don't support it.
 
 ---
 
-## 📊 Sample Test Strings
+##  Sample Test Strings
 Try these encoded strings with the tool:
 
 #### For PyPI installation:
@@ -170,7 +170,7 @@ python main.py 'SVOOL DLIOW'
 
 ---
 
-## 🧠 How the Tool Works
+##  How the Tool Works
 - Input any encoded or encrypted string
 - The tool analyzes entropy, character distribution, and patterns
 - Confidence scores determine the most likely encoding types
