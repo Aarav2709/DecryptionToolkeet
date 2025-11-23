@@ -21,6 +21,9 @@ class AutoDetector:
             Base64Decoder(),
             Base32Decoder(),
             Base85Decoder(),
+            Base91Decoder(),
+            Base58Decoder(),
+            Base45Decoder(),
             HexDecoder(),
             BinaryDecoder(),
             AsciiDecoder(),
@@ -28,11 +31,15 @@ class AutoDetector:
             HTMLDecoder(),
             CaesarDecoder(),
             ROT13Decoder(),
+             ROT47Decoder(),
+            ROT5Decoder(),
+            ROT18Decoder(),
             AtbashDecoder(),
             VigenereDecoder(),
             XORDecoder(),
             MorseDecoder(),
             BaconianDecoder(),
+            A1Z26Decoder(),
             AffineDecoder(),
             UnicodeDecoder(),
             TimestampDecoder(),
@@ -44,12 +51,15 @@ class AutoDetector:
             TwoSquareDecoder(),
             TrifidDecoder(),
             BifidDecoder(),
+            TapCodeDecoder(),
             GromarkDecoder(),
             BeaufortDecoder(),
             PhillipsDecoder(),
             NihilistDecoder(),
             UUDecoder(),
-            XXDecoder()
+            XXDecoder(),
+            QuotedPrintableDecoder(),
+            DNADecoder()
         ]
 
     def detect(self, data: str, threshold: float = 0.5) -> List[Tuple[str, float, BaseDecoder]]:
@@ -101,9 +111,11 @@ class AutoDetector:
         Returns:
             Dictionary with analysis results
         """
+        unique_chars = sorted(set(data))
         analysis = {
             'length': len(data),
-            'unique_chars': len(set(data)),
+            'unique_chars': len(unique_chars),
+            'characters': unique_chars,
             'entropy': self._calculate_entropy(data),
             'char_distribution': self._get_char_distribution(data),
             'patterns': self._detect_patterns(data),

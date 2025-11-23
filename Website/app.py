@@ -14,6 +14,7 @@ import os
 import traceback
 import logging
 from flask import Flask, render_template, request, jsonify
+from werkzeug.exceptions import HTTPException
 from typing import List, Dict, Any
 
 # Import from local Website directories (copied from Python folder)
@@ -62,10 +63,11 @@ logger = logging.getLogger(__name__)
 
 @app.errorhandler(Exception)
 def handle_exception(e):
-    # Log full traceback for debugging in Vercel logs
+    if isinstance(e, HTTPException):
+        return e
+
     tb = traceback.format_exc()
     logger.error('Unhandled exception: %s', tb)
-    # Return error and traceback (helpful for debugging deployment issues)
     return jsonify({'error': str(e), 'traceback': tb}), 500
 
 

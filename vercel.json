@@ -3,10 +3,22 @@
   "builds": [
     {
       "src": "Website/app.py",
-      "use": "@vercel/python"
+      "use": "@vercel/python",
+      "config": {
+        "includeFiles": [
+          "Website/templates/**",
+          "Website/static/**",
+          "Website/decoders/**",
+          "Website/utils/**"
+        ]
+      }
     }
   ],
   "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "Website/static/$1"
+    },
     {
       "src": "/(.*)",
       "dest": "Website/app.py"
