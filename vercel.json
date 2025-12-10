@@ -16,11 +16,11 @@
   ],
   "routes": [
     {
-      "src": "/static/(.*)",
-      "dest": "Website/static/$1"
+      "src": "^/static/(.*)$",
+      "dest": "/Website/static/$1"
     },
     {
-      "src": "/(.*)",
+      "src": "^/(.*)$",
       "dest": "Website/app.py"
     }
   ],
