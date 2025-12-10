@@ -74,7 +74,7 @@ def handle_exception(e):
 @app.route('/')
 def index():
     """Main page with the decryption interface."""
-    return render_template('index.html')
+    return render_template('app.html')
 
 
 @app.route('/api/analyze', methods=['POST'])
